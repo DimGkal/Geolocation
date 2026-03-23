@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Exercise 5: Geolocation</title>
+</head>
+<body>
+    <input type="button" id="btn" value="Get My Location">
+    <p id="lat"></p>
+    <p id="long"></p>
+    <p id="accu"></p>
+<script>
+    document.getElementById('btn').addEventListener('click', () => {
+      setTimeout(() => {document.getElementById('btn').value = "Locating..."}), 1000;
+        
+        if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                document.getElementById('lat').innerText = `Latitude: ${position.coords.latitude}`;
+                document.getElementById('long').innerText = `Longitude: ${position.coords.longitude}`;
+                document.getElementById('accu').innerText = `Accuracy: ${position.coords.accuracy}`;
+                document.getElementById('btn').value = "Get My Location";
+            }),
+            (error) => {alert(`Error: ${error.message}`)}
+
+            const options = {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            }
+        }
+      
+    })
+</script>    
+</body>
+</html>
